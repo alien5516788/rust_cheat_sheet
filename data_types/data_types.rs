@@ -56,7 +56,7 @@ let mut name2 = String::from("Your Name"); // ignore this
 // Pointer
 {
 
-    /* You can have unlimited number of mutable and immutable pointers at the same time */ 
+    /* There can be unlimited number of mutable and immutable pointers at the same time */ 
     &name1 as *const String;
     &mut name1 as *mut String;
     let ptr1 : *const String = &name1; // *const Type : immutable raw pointer
@@ -86,6 +86,9 @@ let mut name2 = String::from("Your Name"); // ignore this
 
     let speak_ptr : fn (String);
     speak_ptr = speak; // memory address
+
+    let speak_ptr : fn (String);
+    speak_ptr = speak as fn (String); // memory address
 
     // calling
     speak_ptr(String::from("Name"));

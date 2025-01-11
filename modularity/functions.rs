@@ -10,7 +10,7 @@ fn function() -> () {
     2;
 }
 
-/* fucntion with cutom return type */
+/* function with custom return type */
 fn function() -> i32 { 
     2
 }
@@ -19,7 +19,7 @@ fn function() -> i32 {
     return 2;
 }
 
-/* fucntion with parameters */
+/* function with parameters */
 fn function(a : i32, b : i32) -> i32 { 
     return a + b;
 }
@@ -72,3 +72,19 @@ fn functionA() {
 
 // closures
 
+{
+
+    let mut num : i32 = 0; // temp var
+    
+    // closure declaration
+    // closure will capture the state of variable num
+    let mut print_num = || { 
+        println!("Hello {}", num);
+        num += 1;
+    };
+    
+    // calling
+    print_num(); // output: 0
+    print_num(); // output: 1
+    
+}

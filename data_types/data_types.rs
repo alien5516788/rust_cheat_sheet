@@ -1,22 +1,22 @@
-// primitive types // note completed !!!!  
+// primitive types // note completed !!!!
 
 // unit type
 {
     (); /* A type similar to void. */
 
     let x : () = (); /* only the value can be assign to is also () . */
- }          
-         
+ }
+
 // never type
 {
 
-    ! /* Yes this is the symbol */ 
+    ! /* Yes this is the symbol */
         /* Basically the program will not continue to execute,
         after encountering never type.
         Rarely used. */
 
-    fn infinite_loop() -> ! { 
-        /* Never returns the control back to caller 
+    fn infinite_loop() -> ! {
+        /* Never returns the control back to caller
         or evaluate to a type */
         loop { }
     }
@@ -26,7 +26,7 @@
 
 // literals
 {
-    67; 
+    67;
     "sdf";
 }
 
@@ -37,7 +37,7 @@ let mut name1 = String::from("My Name"); // ignore this
 let mut name2 = String::from("Your Name"); // ignore this
 
 // Reference
-{   
+{
 
     /* There can be mutiple immutable references, but only one mutable reference.
         There cannot be a mutable and an immutable refernce at the same time. */
@@ -56,7 +56,7 @@ let mut name2 = String::from("Your Name"); // ignore this
 // Pointer
 {
 
-    /* There can be unlimited number of mutable and immutable pointers at the same time */ 
+    /* There can be unlimited number of mutable and immutable pointers at the same time */
     &name1 as *const String;
     &mut name1 as *mut String;
     let ptr1 : *const String = &name1; // *const Type : immutable raw pointer
@@ -73,7 +73,7 @@ let mut name2 = String::from("Your Name"); // ignore this
 }
 
 // Function pointers
-{    
+{
 
     fn speak(name : String) -> () {
         println!("Hello {}", name);

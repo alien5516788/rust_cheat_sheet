@@ -1,4 +1,4 @@
-// primitive types // note completed !!!!
+// primitive types // not completed !!!!
 
 // unit type
 {

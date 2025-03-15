@@ -11,17 +11,17 @@ struct Animal {
 /* Is like an abstract implementation shared with mutiple types
     Cannot have multiple trait blocks with same name */
 trait Walk {
-    
+
     // Contains method signature
     fn walk();
     fn run(&self);
 
     // Can have a default implementation
     fn fly(self) {
-        // self parameter is used to denote that this is a method function
+        // self parameter is used to denote that this is a member function
         println!("I'm flying ...");
     }
-    
+
 }
 
 // trait implementation
@@ -38,7 +38,7 @@ impl Walk for Person {
 }
 
 impl Walk for Animal {
-   
+
     fn walk() {
         println!("Animal is walking");
     }

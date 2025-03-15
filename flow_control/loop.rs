@@ -1,7 +1,6 @@
 // Infinite loop
 loop {
     println!("Forever");
-    break; // ignore the break
 }
 
 // Loop that terminates

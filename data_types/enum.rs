@@ -2,7 +2,7 @@
  enum GameState {
     Play,
     Paused (i32),
-    Resume (i32, i32), 
+    Resume (i32, i32),
     Setting { particles : i64, refresh_rate : f32 }
     // only the way to extract input data is through pattern matching
 }
@@ -45,4 +45,4 @@ if let Coin::Pound(material) = coin {
     println!("Not a Pound or Penny");
 }
 
-// note: Most of the time enums are used with patteern matching
+// note: Most of the time enums are used with pattern matching

@@ -11,16 +11,16 @@ fn function() -> () {
 }
 
 /* function with custom return type */
-fn function() -> i32 { 
+fn function() -> i32 {
     2
 }
 
-fn function() -> i32 { 
+fn function() -> i32 {
     return 2;
 }
 
 /* function with parameters */
-fn function(a : i32, b : i32) -> i32 { 
+fn function(a : i32, b : i32) -> i32 {
     return a + b;
 }
 
@@ -30,12 +30,12 @@ fn function(a : i32, b : i32, name : String) -> i32 {
 }
 
 /* functions cannot be overloaded */
-/* this script won't run due to above examples having same name 
+/* this script won't run due to above examples having same name
 regardless of having different parameters */
 
 /* nested functions */
 fn functionA() {
-    
+
     println!("functionA");
 
     fn functionB() {
@@ -47,7 +47,7 @@ fn functionA() {
 }
 
 // Function pointers
-{    
+{
 
     fn speak(name : String) -> () {
         println!("Hello {}", name);
@@ -75,16 +75,16 @@ fn functionA() {
 {
 
     let mut num : i32 = 0; // temp var
-    
+
     // closure declaration
     // closure will capture the state of variable num
-    let mut print_num = || { 
+    let mut print_num = || {
         println!("Hello {}", num);
         num += 1;
     };
-    
+
     // calling
     print_num(); // output: 0
     print_num(); // output: 1
-    
+
 }

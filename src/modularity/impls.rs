@@ -3,29 +3,29 @@ struct Person {
     age : i32
 }
 
-// can have mutiple implementation blocks
+// Can have mutiple implementation blocks
 impl Person {
 
-    /* method
+    /* Method
         have a reference to self
-        must be first parameter */
+        must be the first parameter */
     fn update_name(&mut self) { 
         self.name = String::from("Other Name");
     }
 
-    /* cannot implement same function or method twice,
+    /* Cannot implement same function or method twice,
         in same or another implementation block */
 
 }
 
 impl Person {
     
-    // method
+    // Method
     fn speak(&self) { 
         println!("I m a person");
     }
     
-    /* associated function
+    /* Associated function
         doesn't have a reference to self */
     fn eat() {  
         println!("Yum Yum");
@@ -33,20 +33,24 @@ impl Person {
 
 }
 
-// initialization
-let mut person = Person {
-    name : String::from("Person Name"),
-    age : 67
-};
+fn impls() {
+    
+    // Initialization
+    let mut person = Person {
+        name : String::from("Person Name"),
+        age : 67
+    };
+    
+    // Accessing functions and methods
+    /* Methods can be accessed by dot syntax,
+       as well as colon syntax with explicitly giving a reference to self */
+    person.update_name();
+    Person::update_name(&mut person);
+    
+    person.speak();
+    Person::speak(&person);
+    
+    /* Associated functions can only be accessed by colon syntax */
+    Person::eat();
 
-// accessing functions and methods
-/* methods can be accessed by dot syntax,
-   as well as colon syntax with explicitly giving a reference to self */
-person.update_name();
-Person::update_name(&mut person);
-
-person.speak();
-Person::speak(&person);
-
-/* associated functions can only be accessed by colon syntax */
-Person::eat();
+}

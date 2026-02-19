@@ -15,7 +15,7 @@ fn pattern_match() {
     
     let num2 = 10;
     
-    match num {
+    match num2 {
         1 => println!("Num 1"),
         2 => println!("Num 2"),
         3 => println!("Num 3"),

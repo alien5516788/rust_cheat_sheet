@@ -17,20 +17,73 @@ fn generic_functions() {
 }
 
 fn gneric_structs() {
+    // Generic struct
     struct Point<T, U> {
         x: T,
         y: U,
     }
+
+    let p = Point { x: 1, y: 2.4 };
+    let p = Point::<i32, f64> { x: 1, y: 2.4 };
+
+    // Generic struct with a const parameter
+    struct List<T, const U: usize> {
+        t: T,
+        l: [i32; U],
+    }
+
+    let l = List {
+        t: "Hello",
+        l: [1, 2, 3],
+    };
+    let l = List::<&str, 3> {
+        t: "Hello",
+        l: [1, 2, 3],
+    };
+
+    // Generic struct with default type parameter
+    struct Item<T, U = f32> {
+        t: T,
+        l: U,
+    }
+
+    let i = Item {
+        t: "World",
+        l: 3.14,
+    };
+    let i = Item::<&str> {
+        t: "World",
+        l: 3.14,
+    };
 }
 
-fn generics() {
-    // Struct generics
-
+fn generics_enums() {
     // Generic enum
-    enum Output<T> {
+    enum Output1<T> {
         Value(T),
         None,
     }
+    
+    let o = Output1::Value("Hello");
+    let o = Output1::<&str>::None;
+
+    // Generic enum with default type parameter and const parameter
+    enum Output2<T, const U: usize> {
+        Value1([i32; U]),
+        Value2(T),
+    }
+    
+    let o = Output2::Value1::<[i32; 3], 3>([1, 2, 3]);
+    let o = Output2::<&str, 3>::Value2("Hello");
+
+    // Generic enum with default type parameter
+    enum Output3<T, U = f32> {
+        Value1(T),
+        Value2(U),
+    }
+    
+    let o = Output3::Value1::<&str>("Hello");
+    let o = Output3::<&str>::Value2(3.14);
 
     // Generic trait
     trait GenericTrait<T> {
@@ -51,13 +104,4 @@ fn generics() {
             y
         }
     }
-
-    // const generics
-    struct ArrayHolder<T, const N: usize> {
-        arr: [T; N],
-    }
-
-    let numbers = ArrayHolder::<i32, 5> {
-        arr: [1, 2, 3, 4, 5],
-    };
 }

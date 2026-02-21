@@ -1,4 +1,32 @@
 // ==========================================================
+// ASSOCIATED TYPES (GATs)
+// ==========================================================
+
+fn associated_types() {
+    // Associated types are only supported in traits
+    trait Container {
+        type Item;
+
+        fn get(&self) -> Self::Item;
+    }
+
+    struct Boxed<T> {
+        value: T,
+    }
+
+    impl<T: Copy> Container for Boxed<T> {
+        type Item = T;
+
+        fn get(&self) -> Self::Item {
+            self.value
+        }
+    }
+
+    let b = Boxed { value: 10 };
+    let _v = b.get();
+}
+
+// ==========================================================
 // GENERIC ASSOCIATED TYPES (GATs)
 // ==========================================================
 
@@ -15,13 +43,15 @@ trait MyIterator {
 struct Numbers;
 
 impl MyIterator for Numbers {
-    type Item<'a> = &'a i32 where Self: 'a;
+    type Item<'a>
+        = &'a i32
+    where
+        Self: 'a;
 
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>> {
         None
     }
 }
-
 
 // ==========================================================
 // AUTO TRAITS
@@ -37,7 +67,6 @@ fn auto_trait_example() {
     requires_send(x);
 }
 
-
 // ==========================================================
 // MARKER TRAITS
 // ==========================================================
@@ -49,7 +78,6 @@ trait Marker {}
 struct MyType;
 
 impl Marker for MyType {}
-
 
 // ==========================================================
 // PHANTOM DATA
@@ -71,7 +99,6 @@ impl<T> Wrapper<T> {
     }
 }
 
-
 // ==========================================================
 // ZERO-SIZED TYPES (ZST)
 // ==========================================================
@@ -81,7 +108,6 @@ struct Empty;
 fn zst_example() {
     let _e = Empty;
 }
-
 
 // ==========================================================
 // BLANKET IMPLEMENTATION
@@ -97,7 +123,6 @@ impl<T: std::fmt::Debug> MyTrait for T {
     }
 }
 
-
 // ==========================================================
 // NEGATIVE TRAIT IMPL (Nightly only)
 // ==========================================================
@@ -106,7 +131,6 @@ impl<T: std::fmt::Debug> MyTrait for T {
 
 // auto trait MyAutoTrait {}
 // impl !MyAutoTrait for i32 {}
-
 
 // ==========================================================
 // SPECIALIZATION (Nightly only)
@@ -130,7 +154,6 @@ impl<T: std::fmt::Debug> MyTrait for T {
 //     }
 // }
 
-
 // ==========================================================
 // CONST GENERIC TRAIT IMPL
 // ==========================================================
@@ -145,7 +168,6 @@ impl<const N: usize> ArrayTrait for [i32; N] {
     }
 }
 
-
 // ==========================================================
 // HIGHER-RANKED TRAIT BOUNDS (HRTB)
 // ==========================================================
@@ -156,7 +178,6 @@ where
 {
     f("hello");
 }
-
 
 // ==========================================================
 // ASSOCIATED TYPE VS GENERIC TRAIT PATTERN

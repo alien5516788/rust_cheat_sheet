@@ -80,7 +80,7 @@ fn char_type() {
 }
 
 fn references() {
-    // Immutable references:
+    // Immutable references(pointers):
     // - Multiple immutable references allowed
     // Mutable references:
     // - Only one mutable reference allowed at a time
@@ -101,6 +101,7 @@ fn references() {
 
 fn pointers() {
     // Raw pointers:
+    // Mostly exists for c compatibility. Rarely used
     // - Unlimited number of mutable or immutable pointers allowed
     // - Unsafe to dereference without `unsafe` block
     // Note: & symbol returns memory address

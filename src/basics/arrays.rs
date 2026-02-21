@@ -1,12 +1,14 @@
 fn array() {
     // Homogeneous, fixed size
-    let arr1: [[i32; 2]; 3] = [[2, 5], [6, 1], [8, 1]]; // Normal
-    let arr2: [[i32; 2]; 3] = [[2; 2]; 3]; // Short hand
+    let _arr: [[i32; 2]; 3] = [[2, 5], [6, 1], [8, 1]];
+
+    // Short hand
+    let _arr = [[2; 2]; 3]; // Short hand
 
     // Destructuring
-    let [[elm0, elm1], [elm2, elm3], [elm4, elm5]] = arr1;
+    let [[_elm0, _elm1], [_elm2, _elm3], [_elm4, _elm5]] = _arr;
 
     // Accessing elements
-    let elm = elm4;
-    let elm = arr1[2][0];
+    let _elm = _elm4;
+    let _elm = _arr[2][0];
 }

@@ -1,11 +1,11 @@
 fn tuple() {
     // Heterogeneous, fixed size
-    let tup: (i32, char, (i32, i32)) = (2, 'h', (2, 5));
+    let tup: (i32, char, (i32, f32)) = (2, 'h', (2, 5.5));
 
     // Destructuring
-    let (elm0, elm1, (elm2, elm3)): (i32, char, (i32, i32)) = (2, 'h', (2, 5));
+    let (_elm0, _elm1, (_elm2, _elm3)) = tup;
 
     // Accessing elements
-    let elm = elm1;
-    let elem = tup.2 .0;
+    let _elm = _elm1;
+    let _elem = tup.2 .0;
 }

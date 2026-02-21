@@ -1,54 +1,47 @@
+// Enums
+// =====
+
+/*
+    Enums defines types that have fixed set of type variants
+
+    They are like containers for multiple struct types
+*/
+
 fn enums() {
-    // declaration
     enum GameState {
-        Play,
-        Paused(i32),
-        Resume(i32, i32),
-        Setting { particles: i64, refresh_rate: f32 }, // only the way to extract input data is through pattern matching
+        Play,             // unit variant
+        Paused(i32, i32), // tuple variant
+        Resume,
+        Exit { save: bool, location: String }, // named field variant
     }
 
-    // instantiating
-    GameState::Play;
+    let mut _state = GameState::Play;
 
-    let state = GameState::Setting {
-        particles: 30,
-        refresh_rate: 60.0f32,
+    _state = GameState::Paused(10, 25);
+
+    _state = GameState::Exit {
+        save: true,
+        location: String::from("home"),
     };
 
-    let state: GameState = GameState::Paused(34);
-
-    // extracting values via pattern matching
-    let state = GameState::Paused(34);
-
-    match state {
-        // matching should be done to all the enum elements
+    // Destructuring via pattern matching
+    // All possible variants should be matched
+    match &_state {
         GameState::Play => println!("play"),
-        GameState::Paused(time) => println!("puased {} min", time),
-        GameState::Resume(begin, _) => println!("resume at {} min end at any min", begin),
-        GameState::Setting {
-            particles,
-            refresh_rate,
-        } => println!("Settings"),
+        GameState::Paused(begin, _) => println!("paused at {} min", begin),
+        GameState::Resume => println!("resume"),
+        GameState::Exit { save, location } => {
+            println!("exit with save: {} and location: {}", save, location)
+        }
     }
 
-    // If let
-    // Used to match enums
-    // Doesn't need to be implemented for all elements
-    enum Coin {
-        Penny,
-        Pound(char), // S - Silver G - Gold
-        Cent,
-    }
-
-    let coin: Coin = Coin::Pound('G');
-
-    if let Coin::Pound(material) = coin {
-        println!("Coin is {} Pound", material);
-    } else if let Coin::Penny = coin {
-        println!("Coin is penny");
+    // Destructuring via if let
+    // Unnecessary variants can be ignored
+    if let GameState::Paused(begin, _) = _state {
+        println!("paused at {} min", begin);
+    } else if let GameState::Exit { save, location } = _state {
+        println!("exit with save: {} and location: {}", save, location);
     } else {
-        println!("Not a Pound or Penny");
+        println!("other state");
     }
-
-    // note: Most of the time enums are used with pattern matching
 }

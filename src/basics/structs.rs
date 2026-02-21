@@ -1,49 +1,41 @@
-fn structs() {
-    // regular struct
+// Structs
+// =======
+
+/*
+    Structs define types
+
+    There are 3 types of structs
+        1. Unit structs
+        2. Tuple structs
+        3. Named filed structs
+*/
+
+fn unit_structs() {
+    struct Vehical;
+
+    let _vehical = Vehical;
+}
+
+fn tuple_structs() {
+    struct Color(i32, i32, i32, f32);
+
+    let _color = Color(255, 0, 0, 1.0f32);
+
+    // Destructuring
+    let Color(_r, _g, _b, _a) = _color;
+}
+
+fn named_filed_structs() {
     struct Person {
         name: String,
         age: i32,
     }
 
-    Person {
+    let _person = Person {
         name: String::from("my name"),
         age: 21,
     };
 
-    let person1 = Person {
-        name: String::from("my name"),
-        age: 21,
-    };
-
-    let person2: Person = Person {
-        name: String::from("my name"),
-        age: 21,
-    };
-
-    let Person { name, age } = person1; // field name should equal to that of struct's
-
-    let Person { name, age }: Person = person2;
-
-    // tuple struct
-    struct Color(i32, i32, i32, f32);
-
-    Color(255, 0, 0, 1.0f32);
-
-    let red_color = Color(255, 0, 0, 1.0f32);
-
-    let red_color: Color = Color(255, 0, 0, 1.0f32);
-
-    let Color(r, g, b, a) = red_color;
-
-    let Color(r, g, b, a): Color = red_color;
-
-    // unit like struct
-    struct Vehical; // this should be implemented via traits and impls
-
-    // accessing elements
-    let person_age = person1.age;
-    let person_age = age;
-
-    let red = red_color.0;
-    let red = r;
+    // Destructuring
+    let Person { name, age } = _person; // field name should equal to that of struct's
 }

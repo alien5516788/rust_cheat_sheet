@@ -23,30 +23,32 @@ fn if_else() {
     }; // note semicolon
 
     /* Error
-    because the evaluated expression is not terminated */
-    if x == 6 {
-        println!("x == 6");
-        x // note no semicolon
-    } else if x > 6 {
-        println!("x > 6");
-        x // note no semicolon
-    } else {
-        println!("x < 6");
-        x // note no semicolon
-    } // note no semicolon
+    because the evaluated expression is not terminated
+        if x == 6 {
+            println!("x == 6");
+            x // note no semicolon
+        } else if x > 6 {
+            println!("x > 6");
+            x // note no semicolon
+        } else {
+            println!("x < 6");
+            x // note no semicolon
+        } // note no semicolon
+    */
 
     /* Error
-    because not all blocks evaluate to same type */
-    if x == 6 {
-        println!("x == 6");
-        x; // note semicolon
-    } else if x > 6 {
-        println!("x > 6");
-        x // note no semicolon
-    } else {
-        println!("x < 6");
-        x // note no semicolon
-    };
+    because not all blocks evaluate to same type
+        if x == 6 {
+            println!("x == 6");
+            x; // note semicolon
+        } else if x > 6 {
+            println!("x > 6");
+            x // note no semicolon
+        } else {
+            println!("x < 6");
+            x // note no semicolon
+        };
+    */
 
     // Assigning to a variable
     let num = if x == 6 {

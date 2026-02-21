@@ -24,10 +24,10 @@ fn enums() {
         // matching should be done to all the enum elements
         GameState::Play => println!("play"),
         GameState::Paused(time) => println!("puased {} min", time),
-        GameState::Resume(begin, i32) => println!("resume at {} min end at any min", begin),
+        GameState::Resume(begin, _) => println!("resume at {} min end at any min", begin),
         GameState::Setting {
-            particles: i64,
-            refresh_rate: f32,
+            particles,
+            refresh_rate,
         } => println!("Settings"),
     }
 

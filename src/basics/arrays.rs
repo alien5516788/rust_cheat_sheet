@@ -1,6 +1,5 @@
 fn array() {
     // Homogeneous, fixed size
-
     let arr1: [[i32; 2]; 3] = [[2, 5], [6, 1], [8, 1]]; // Normal
     let arr2: [[i32; 2]; 3] = [[2; 2]; 3]; // Short hand
 

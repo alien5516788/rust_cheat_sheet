@@ -1,0 +1,149 @@
+fn unit_type() {
+    // A type similar to void
+    // Only the value can be assign to is also `()`
+
+    let x: () = ();
+}
+
+fn never_type() {
+    // A type that indicates that no value produces
+    // Cannot be used directly
+    // Only used as function return type
+    // Basically the program will not continue to execute, after encountering `!`
+
+    fn infinite_loop() -> ! {
+        loop {}
+    }
+
+    fn panic_example() -> ! {
+        panic!("This function never returns!");
+    }
+}
+
+fn boolean_type() {
+    // Indicate true or false states
+
+    let t: bool = true;
+    let f: bool = false;
+}
+
+fn integer_type() {
+    // Signed integers
+    let i8_max: i8 = 127;
+    let i16_max: i16 = 32_767;
+    let i32_max: i32 = 2_147_483_647;
+    let i64_max: i64 = 9_223_372_036_854_775_807;
+    let i128_max: i128 = 170_141_183_460_469_231_731_687_303_715_884_105_727;
+    let isize_max: isize = isize::MAX; // platform-dependent
+
+    // Unsigned integers
+    let u8_max: u8 = 255;
+    let u16_max: u16 = 65_535;
+    let u32_max: u32 = 4_294_967_295;
+    let u64_max: u64 = 18_446_744_073_709_551_615;
+    let u128_max: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_455;
+    let usize_max: usize = usize::MAX; // platform-dependent
+
+    // Prefixes and suffixes
+    let dec_i32: i32 = 2_147_483_647i32; // Decimal
+    let hex_i32: i32 = 0x7FFF_FFFF; // Hexadecimal
+    let bin_i32: i32 = 0b0111_1111_1111_1111_1111_1111_1111_1111; // Binary
+    let oct_i32: i32 = 0o17_777_777_777; // Octal
+
+    let u32_val: u32 = 4_294_967_295; // Signedlet f32_large: f32 = 340_282_350_000_000_000_000_000_000_000_000_000_000f32;
+    let f64_large: f64 = 179_769_313_486_231_570_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000f64;
+
+    let hex_u32: u32 = 0xFFFF_FFFFu32; // Unsigned
+
+    // Scientific
+    let scn: i32 = 3e8 as i32;
+}
+
+fn float_type() {
+    // Normal
+    let f32_large: f32 = 340_282_350_000_000_000_000_000_000_000_000_000_000f32;
+    let f64_large: f64 = 179_769_313_486_231_570_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000f64;
+
+    // Scientific
+    let f32_max: f32 = 3.402_823_47e38f32;
+    let f64_max: f64 = 1.797_693_134_862_315_7e308f64;
+
+    // As you can see scientific notation is your friend for large numbers
+}
+
+fn char_type() {
+    // Represents a Unicode scalar value
+    // Single quotes required
+
+    let c: char = 'a';
+    let emoji: char = '😊';
+}
+
+fn references() {
+    // Immutable references:
+    // - Multiple immutable references allowed
+    // Mutable references:
+    // - Only one mutable reference allowed at a time
+    // - Cannot have mutable and immutable references simultaneously
+
+    let mut name1 = String::from("My Name"); // Ignore
+    let mut name2 = String::from("Your Name"); // Ignore
+
+    &name1; // Memory address
+    let ref1: &String = &name1; // Immutable reference (memory address)
+    let ref2: &String = &name1; // Another immutable reference
+    let mut_ref1: &mut String = &mut name2; // Mutable reference
+
+    // Dereferencing references
+    let ref_val: String = (*ref1).clone(); // get value (clone needed for owned String)
+    let mut_ref_val: String = (*mut_ref1).clone(); // get mutable value
+}
+
+fn pointers() {
+    // Raw pointers:
+    // - Unlimited number of mutable or immutable pointers allowed
+    // - Unsafe to dereference without `unsafe` block
+    // Note: & symbol returns memory address
+
+    let mut name1 = String::from("My Name"); // Ignore
+    let mut name2 = String::from("Your Name"); // Ignore
+
+    &name1; // Memory address
+    let ptr1: *const String = &name1 as *const String; // immutable raw pointer
+    let ptr2: *const String = &name1 as *const String; // another immutable raw pointer
+    let mut_ptr1: *mut String = &mut name1 as *mut String; // mutable raw pointer
+    let mut_ptr2: *mut String = &mut name1 as *mut String; // another mutable raw pointer
+
+    // Dereferencing raw pointers
+    // Considered unsafe
+    unsafe {
+        let val: String = (*ptr1).clone(); // get value
+        let mut_val: String = (*mut_ptr1).clone(); // get mutable value
+    }
+}
+
+fn slice_type() {
+    // A slice is a view/reference into a part of contiguous data
+    // It does not own the data, it only borrows it
+    // More accurately is a representation of and exisiting data
+    // It doesn't hold any new data on its own
+    // The slice type [T] cannot be used directly, always present as slice reference &[T], &mut [T]
+    // let slice: &[i32] = &someVec[1..3];
+    // [1..3] is not range operator but similar syntax used within slice operator
+
+    // A slice has no fixed size, cannot exist by itself.
+    // let x: [i32];        // wrong
+    // let x: &[i32];       // wrong – no data to point to
+
+    let arr1 = vec![10, 20, 30, 40, 50]; // Ignore
+
+    let s1: &[i32] = &arr1[..]; // whole slice
+    let s2: &[i32] = &arr1[1..4]; // sub-slice: [20, 30, 40]
+    let s3: &[i32] = &arr1[..2]; // [10, 20]
+    let s4: &[i32] = &arr1[2..]; // [30, 40, 50]
+
+    let mut arr2 = vec![1, 2, 3, 4]; // Ignore
+
+    let s_mut: &mut [i32] = &mut arr2[1..3];
+    s_mut[0] = 99;
+}

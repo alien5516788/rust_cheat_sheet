@@ -1,4 +1,4 @@
-// Polymorphism TODO
+// Polymorphism
 // ============
 
 /*
@@ -9,6 +9,13 @@
         1. Trait bounds (static dispatch)
         2. Trait objects (dynamic dispatch)
 */
+
+// Static Dispatch
+// ===============
+
+fn static_dispatch_via_function_pointers() {
+    // Refer `basics/functions.rs -> function_pointers`
+}
 
 fn static_dispatch_via_generics() {
     /*
@@ -40,8 +47,17 @@ fn static_dispatch_via_generics() {
         }
     }
 
-    // Generic function
-    fn make_speak<T: Speak>(entity: T) {
+    // Generic function with trait bounds
+    fn make_speak<T>(entity: T)
+    where
+        T: Speak,
+    {
+        entity.speak();
+    }
+
+    // Generic function (`impl Trait` syntactic sugar)
+    // Exactly same thing as generic function with trait bounds
+    fn make_speak2(entity: impl Speak) {
         entity.speak();
     }
 
@@ -62,31 +78,8 @@ fn static_dispatch_via_generics() {
     make_speak(d);
 }
 
-fn static_dispatch_impl_trait() {
-    trait Move {
-        fn move_forward(&self);
-    }
-
-    struct Car;
-
-    impl Move for Car {
-        fn move_forward(&self) {
-            println!("Car moving");
-        }
-    }
-
-    fn drive(entity: impl Move) {
-        entity.move_forward();
-    }
-
-    /*
-        impl Trait is just syntactic sugar for generics.
-        Still static dispatch.
-    */
-
-    let c = Car;
-    drive(c);
-}
+// Dynamic Dispatch
+// ================
 
 fn dynamic_dispatch_trait_objects() {
     /*
@@ -128,16 +121,15 @@ fn dynamic_dispatch_trait_objects() {
     make_speak(&d);
 
     /*
-        &dyn Speak means:
-
-        - entity is a fat pointer
-        - contains:
-            1) pointer to data
-            2) pointer to vtable
+        &dyn Speak means,
+            entity is a fat pointer
+            contains,
+                1. pointer to data
+                2. pointer to vtable
     */
 }
 
-fn dynamic_dispatch_heap() {
+fn dynamic_dispatch_via_heap() {
     trait Speak {
         fn speak(&self);
     }
@@ -155,9 +147,9 @@ fn dynamic_dispatch_heap() {
     animal.speak();
 
     /*
-        - Stored on heap.
-        - Called via vtable.
-        - Runtime dispatch.
+        Stored on heap.
+        Called via vtable.
+        Runtime dispatch.
     */
 }
 

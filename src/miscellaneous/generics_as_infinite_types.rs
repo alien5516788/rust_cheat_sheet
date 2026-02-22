@@ -2,7 +2,7 @@
 // ===========================
 
 /*
-    When a struct has a generic parameter, it can represent many concrete types.
+    When a struct has a generic parameter, it can represent many concrete types (same for traits as well).
 
     Each concrete instantiation can have its own implementation,
         or you can write a universal generic implementation.

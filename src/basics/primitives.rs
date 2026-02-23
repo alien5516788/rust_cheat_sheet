@@ -8,7 +8,6 @@ fn unit_type() {
 fn never_type() {
     // A type that indicates that no value produces
     // Cannot be used directly
-    // Only used as function return type
     // Basically the program will not continue to execute, after encountering `!`
 
     fn infinite_loop() -> ! {
@@ -50,7 +49,8 @@ fn integer_type() {
     let bin_i32: i32 = 0b0111_1111_1111_1111_1111_1111_1111_1111; // Binary
     let oct_i32: i32 = 0o17_777_777_777; // Octal
 
-    let u32_val: u32 = 4_294_967_295; // Signedlet f32_large: f32 = 340_282_350_000_000_000_000_000_000_000_000_000_000f32;
+    let u32_val: u32 = 4_294_967_295; // Signed
+    let f32_large: f32 = 340_282_350_000_000_000_000_000_000_000_000_000_000f32;
     let f64_large: f64 = 179_769_313_486_231_570_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000f64;
 
     let hex_u32: u32 = 0xFFFF_FFFFu32; // Unsigned
@@ -72,24 +72,28 @@ fn float_type() {
 }
 
 fn char_type() {
-    // Represents a Unicode scalar value
-    // Single quotes required
+    /*
+        Represents a Unicode scalar value
+        Single quotes required
+    */
 
     let c: char = 'a';
     let emoji: char = '😊';
 }
 
 fn references() {
-    // Immutable references(pointers):
-    // - Multiple immutable references allowed
-    // Mutable references:
-    // - Only one mutable reference allowed at a time
-    // - Cannot have mutable and immutable references simultaneously
+    /*
+        Immutable references(pointers):
+            - Multiple immutable references allowed
+        Mutable references:
+            - Only one mutable reference allowed at a time
+            - Cannot have mutable and immutable references simultaneously
+    */
 
     let mut name1 = String::from("My Name"); // Ignore
     let mut name2 = String::from("Your Name"); // Ignore
 
-    &name1; // Memory address
+    &name1; // Behave like a memory address
     let ref1: &String = &name1; // Immutable reference (memory address)
     let ref2: &String = &name1; // Another immutable reference
     let mut_ref1: &mut String = &mut name2; // Mutable reference
@@ -100,11 +104,12 @@ fn references() {
 }
 
 fn pointers() {
-    // Raw pointers:
-    // Mostly exists for c compatibility. Rarely used
-    // - Unlimited number of mutable or immutable pointers allowed
-    // - Unsafe to dereference without `unsafe` block
-    // Note: & symbol returns memory address
+    /*
+        Mostly exists for c compatibility. Rarely used
+            - Unlimited number of mutable or immutable pointers allowed
+            - Unsafe to dereference without `unsafe` block
+        Note: & symbol returns memory address
+    */
 
     let mut name1 = String::from("My Name"); // Ignore
     let mut name2 = String::from("Your Name"); // Ignore
@@ -134,7 +139,7 @@ fn slice_type() {
 
     // A slice has no fixed size, cannot exist by itself.
     // let x: [i32];        // wrong
-    // let x: &[i32];       // wrong – no data to point to
+    // let x: &[i32];       // wrong – no data to point to (References must be initialized at declaration.)
 
     let arr1 = vec![10, 20, 30, 40, 50]; // Ignore
 

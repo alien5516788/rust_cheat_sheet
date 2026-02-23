@@ -15,8 +15,6 @@
         - Trait must be object-safe
 */
 
-use std::any::TypeId;
-
 fn trait_objects() {
     // Trait implementation
     struct User {
@@ -44,9 +42,11 @@ fn trait_objects() {
     }
 
     // Trait object using `dyn Trait` syntax
+    /*
+        - `item` can be any type implementing Describable
+        - Dispatch is dynamic (resolved at runtime via v-table)
+     */
     fn print_description(item: &dyn Describable) {
-        // `item` can be any type implementing Describable
-        // Dispatch is dynamic: resolved at runtime via vtable
         println!("{}", item.describe());
     }
 

@@ -61,19 +61,16 @@ fn multiple_trait_bounds() {
     // Multiple trait bounds can be added using `+` operator.
     // ex: PartialEq and Clone traits from std lib
 
-    // Trait bound using `impl Trait` syntax (explicitly uses static dispatch without generics)
     fn combine_1(x: impl PartialEq + Clone) -> bool {
         let y = x.clone();
         x == y
     }
 
-    // Trait bound using generics
     fn combine_2<T: PartialEq + Clone>(x: T) -> bool {
         let y = x.clone();
         x == y
     }
 
-    // Trait bound using `where` clause (For complex trait bounds)
     fn combine_3<T>(x: T) -> bool
     where
         T: PartialEq + Clone,
@@ -81,9 +78,6 @@ fn multiple_trait_bounds() {
         let y = x.clone();
         x == y
     }
-
-    // Usage
-    let _v = combine_1(String::from("hello"));
 }
 
 fn trait_bounds() {

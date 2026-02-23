@@ -1,5 +1,12 @@
+// Tuples
+// ======
+
+/*
+    - Heterogeneous
+    - Fixed size
+*/
+
 fn tuple() {
-    // Heterogeneous, fixed size
     let tup: (i32, char, (i32, f32)) = (2, 'h', (2, 5.5));
 
     // Destructuring

@@ -1,6 +1,6 @@
 fn variables() {
-    // `let name: DataType = value;`
-    // By default all varibles are immutable
+    // `let name: Type = value;`
+    // By default all variables are immutable
 
     // Normal variable
     let var: i32;
@@ -19,9 +19,20 @@ fn variables() {
     let mut var: i32 = 4;
 
     // Constant
+    /*
+        - Must have explicit type
+        - Value must be known at compile time
+        - Inlined everywhere it's used
+        - Has no fixed memory address
+    */
     const CNST_VAR: i32 = 4;
 
     // Static
+    /*
+        - Has a fixed memory location
+        - Lives for entire program lifetime
+        - Can be mut (but requires unsafe)
+    */
     static STC_VAR: i32 = 67;
 
     // Empty variable

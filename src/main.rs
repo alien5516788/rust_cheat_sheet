@@ -4,9 +4,6 @@ pub mod flow_control;
 pub mod miscellaneous;
 
 fn main() {
-    let x: i32;
-
-    // x = 34;
-
-    // println!("{}", x)
+    _ = 78;
+    println!("{:?}", vec![1, 2, 3]);
 }

@@ -1,9 +1,16 @@
-fn array() {
-    // Homogeneous, fixed size
+// Arrays
+// ======
+
+/*
+    - Homogeneous
+    - Fixed size
+*/
+
+fn arrays() {
     let _arr: [[i32; 2]; 3] = [[2, 5], [6, 1], [8, 1]];
 
     // Short hand
-    let _arr = [[2; 2]; 3]; // Short hand
+    let _arr = [[2; 2]; 3];
 
     // Destructuring
     let [[_elm0, _elm1], [_elm2, _elm3], [_elm4, _elm5]] = _arr;

@@ -8,6 +8,8 @@
         3. Life time generics
 
     Generics allows mutiple concrete types to be created out of generic types
+
+    By default generics use static dispatch
 */
 
 fn type_generics() {

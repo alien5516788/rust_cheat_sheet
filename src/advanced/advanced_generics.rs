@@ -144,26 +144,6 @@ impl<T: std::fmt::Debug> MyTrait for T {
 // }
 
 // ==========================================================
-// CONST GENERIC TRAIT IMPL
-// ==========================================================
-
-// Const generics allow using constant values as type parameters.
-//
-// Primary purpose:
-// - Generalize over array sizes, numeric constants, etc.
-// Use cases:
-// - Fixed-size arrays, buffers
-trait ArrayTrait {
-    fn size() -> usize;
-}
-
-impl<const N: usize> ArrayTrait for [i32; N] {
-    fn size() -> usize {
-        N
-    }
-}
-
-// ==========================================================
 // HIGHER-RANKED TRAIT BOUNDS (HRTB)
 // ==========================================================
 
@@ -180,4 +160,3 @@ where
 {
     f("hello");
 }
-

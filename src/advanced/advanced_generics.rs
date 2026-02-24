@@ -16,22 +16,6 @@ fn auto_trait_example() {
     requires_send(x); // i32 is Send, so this works
 }
 
-// ==========================================================
-// MARKER TRAITS
-// ==========================================================
-
-// Marker traits are traits without methods. They mark types as having
-// some property.
-//
-// Primary purpose:
-// - Encode metadata about a type without adding behavior.
-// Use cases:
-// - std::marker::Copy, std::marker::Sized
-trait Marker {}
-
-struct MyType;
-
-impl Marker for MyType {} // Marks MyType with this trait
 
 // ==========================================================
 // PHANTOM DATA

@@ -2,24 +2,24 @@
 // ======
 
 /*
-   Traits defines behaviours
+   Traits defines behaviours.
 
-   Similar to a struct but for methods
+   Similar to a struct but for methods.
 
    Unlike structs standalone objects cannot be created with traits,
-       instead they should be implemented on structs
+       instead they should be implemented on structs.
 
-   Traits are the fundamental way of doing polymorphism in rust
+   Traits are the fundamental way of doing polymorphism in rust.
 */
 
 fn traits() {
     trait Move {
-        // Contains method signature
+        // Contains method signature.
         fn walk();
 
         fn run(&self);
 
-        // Can have a default implementation
+        // Can have a default implementation.
         fn fly(&self) {
             println!("I'm flying ...");
         }
@@ -37,9 +37,9 @@ fn traits() {
     }
 
     impl Move for Person {
-        // Trait should be fully implemented for the struct except default iplementation
-        // Default implementation may or may not be implemented again
-        // Cannot have multiple trait implementation of same trait for the same struct
+        // Trait should be fully implemented for the struct except default iplementation.
+        // Default implementation may or may not be implemented again.
+        // Cannot have multiple trait implementation of same trait for the same struct.
 
         fn walk() {
             println!("I am walking");
@@ -82,4 +82,35 @@ fn traits() {
     Animal::walk();
     Animal::run(&_animal);
     _animal.run();
+}
+
+// Marker Traits
+// =============
+
+/*
+   Marker traits are traits without methods. They mark types as having
+       some property.
+
+    Nothing is special about marker traits them selves, they are traits without methods.
+        - Just like structs, enums without fields (not unit structs)
+        - Only usage is special.
+
+   Primary purpose:
+       - Encode metadata about a type without adding behavior.
+
+   Use cases:
+       - To make trait bounds without having methods.
+*/
+fn marker_traits() {
+    trait Marker {}
+
+    struct MyType;
+
+    // Marks MyType with this trait
+    impl Marker for MyType {}
+
+    // Usage example
+    fn do_nothing(arg: impl Marker) {
+        println!("I did nothing with the argument.");
+    }
 }

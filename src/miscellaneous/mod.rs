@@ -1,5 +1,8 @@
 pub mod associated_types_vs_generic_traits;
 pub mod generics_as_infinite_types;
 pub mod polymorphism;
+pub mod statically_and_dynamically_sized_types;
+pub mod str_vs_string_usage;
 pub mod structs_vs_enums;
 pub mod thin_vs_fat_pointers;
+pub mod type_coercion;

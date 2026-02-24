@@ -84,17 +84,21 @@ fn char_type() {
 fn references() {
     /*
         Immutable references(pointers):
-            - Multiple immutable references allowed
+            - Multiple immutable references allowed.
         Mutable references:
-            - Only one mutable reference allowed at a time
-            - Cannot have mutable and immutable references simultaneously
+            - Only one mutable reference allowed at a time.
+            - Cannot have mutable and immutable references simultaneously.
+
+        References are the preferred pointers in rust.
+
+        References can be either thin or a fat pointer depending on the type.
     */
 
     let mut name1 = String::from("My Name"); // Ignore
     let mut name2 = String::from("Your Name"); // Ignore
 
     &name1; // Behave like a memory address
-    let ref1: &String = &name1; // Immutable reference (memory address)
+    let ref1: &String = &name1; // Immutable reference
     let ref2: &String = &name1; // Another immutable reference
     let mut_ref1: &mut String = &mut name2; // Mutable reference
 

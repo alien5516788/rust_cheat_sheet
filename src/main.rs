@@ -3,7 +3,12 @@ pub mod basics;
 pub mod flow_control;
 pub mod miscellaneous;
 
+
+
 fn main() {
-    _ = 78;
-    println!("{:?}", vec![1, 2, 3]);
+    
+    let x: &[u8] = b"hsodigosw";
+    
+    
+    
 }

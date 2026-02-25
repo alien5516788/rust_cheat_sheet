@@ -1,4 +1,5 @@
 pub mod arrays;
+pub mod closures;
 pub mod enums;
 pub mod functions;
 pub mod generics;

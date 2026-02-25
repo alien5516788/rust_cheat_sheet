@@ -67,27 +67,3 @@ fn function_pointers() {
     // Call
     speak_ptr(String::from("Name"));
 }
-
-fn closures() {
-    // Anonymous functions
-    let fun = |name: String| {
-        println!("Hello {}", name);
-    };
-
-    let fun_ptr: fn(String) = fun;
-
-    fun(String::from("Name"));
-    fun_ptr(String::from("Name"));
-
-    // Captures the environment state
-    let mut _num: i32 = 0; // Some variable from environment
-
-    let mut print_num = |num| {
-        // TODO: function signature
-        println!("Hello {}", _num);
-        _num += num;
-    };
-
-    print_num(1); // output: 1
-    print_num(2); // output: 3
-}

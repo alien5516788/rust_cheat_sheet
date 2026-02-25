@@ -28,7 +28,7 @@ async fn example_task(name: &str) {
 // ==============================
 
 #[tokio::main] // starts the Tokio runtime
-async fn main() {
+async fn _main() {
     // Sequential execution: await blocks current task
     example_task("A").await; // main halts until A finishes
 

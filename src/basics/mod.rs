@@ -6,6 +6,7 @@ pub mod generics;
 pub mod impls;
 pub mod primitives;
 pub mod slices;
+pub mod strings;
 pub mod structs;
 pub mod traits;
 pub mod tuples;

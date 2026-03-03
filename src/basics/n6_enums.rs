@@ -2,9 +2,8 @@
 // =====
 
 /*
-    Enums defines types that have fixed set of type variants
-
-    They are like containers for multiple struct types
+    - Enums defines types that have fixed set of type variants
+    - They are like containers for multiple struct types
 */
 
 fn enums() {

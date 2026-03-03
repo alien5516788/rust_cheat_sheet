@@ -3,23 +3,20 @@ pub mod basics;
 pub mod flow_control;
 pub mod miscellaneous;
 
-use tokio::time::{sleep, Duration};
 
-async fn task(name: &str) {
-    println!("{} started", name);
-    sleep(Duration::from_secs(5)).await;
-    println!("{} finished", name);
-}
+fn main() {
+    
+    #[derive(Debug)]
+    struct Person {
+        age: i32,
+    }
+    
+    let mut arr2 = [Person { age: 25 }, Person { age: 30 }, Person { age: 35 }];
+    
+    println!("{:?}", arr2);
+    let s_mut: &mut [Person] = &mut arr2[1..3]; // [Person { age: 30 }, Person { age: 35 }]
 
-#[tokio::main]
-async fn main() {
-    let t1 = task("A");
-    let t2 = task("B");
-    
-    tokio::spawn(t1);
-    tokio::spawn(t2);
-    
-    sleep(Duration::from_secs(5)).await;
-    println!("Main function");
-    // tokio::join!(t1, t2);
+    s_mut[0].age = 99;
+    println!("{:?}", arr2);
+   
 }

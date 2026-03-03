@@ -2,14 +2,11 @@
 // =====
 
 /*
-    Used to define behaviours for structs,
+    - Used to define behaviours for structs,
         as well as implementations for traits.
-
-    Methods are just functions inside an impl block.
-
-    There can be multiple impl blocks for the same type.
-
-    Impl blocks do not store data, only behaviour.
+    - Methods are just functions inside an impl block.
+    - There can be multiple impl blocks for the same type.
+    - Impl blocks do not store data, only behaviour.
 */
 
 fn implementing_behaviours() {

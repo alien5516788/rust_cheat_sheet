@@ -61,7 +61,7 @@ fn async_closure_examples() {
     };
 
     // spawn closure
-    tokio::spawn(closure()); // note the () to run the closure
+    // tokio::spawn(closure()); // note the () to run the closure.  error TODO
 }
 
 // ==============================

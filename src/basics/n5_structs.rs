@@ -2,12 +2,11 @@
 // =======
 
 /*
-    Structs define types
-
-    There are 3 types of structs
+    - Structs define types
+    - There are 3 types of structs
         1. Unit structs
         2. Tuple structs
-        3. Named filed structs
+        3. Named field structs
 */
 
 fn unit_structs() {
@@ -25,7 +24,7 @@ fn tuple_structs() {
     let Color(_r, _g, _b, _a) = _color;
 }
 
-fn named_filed_structs() {
+fn named_field_structs() {
     struct Person {
         name: String,
         age: i32,

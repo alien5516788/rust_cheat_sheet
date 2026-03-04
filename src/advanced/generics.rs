@@ -12,6 +12,13 @@
     By default generics use static dispatch
 */
 
+/*
+    Generic Kind	  Trait Bounds	 Trait Objects	 Lifetime Bounds
+    Type (T)	        Yes	            Yes	               Yes
+    Const (N)	        No	            No	               No
+    Lifetime ('a)	    No	            No	               Yes
+*/
+
 fn type_generics() {
     fn return_tup<T, U>(arg1: T, arg2: U) -> (T, U) {
         (arg1, arg2)
@@ -82,7 +89,7 @@ fn lifetime_generics() {
     }
 }
 
-// Default type for generics
+// Default type for type generics
 // =========================
 
 fn default_type() {

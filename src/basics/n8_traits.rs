@@ -100,7 +100,7 @@ fn marker_traits() {
 
     struct MyType;
 
-    // Marks MyType with this trait
+    // Marks 'MyType' with this trait
     impl Marker for MyType {}
 
     // Usage example

@@ -58,8 +58,8 @@ fn trait_bound_syntax() {
 }
 
 fn multiple_trait_bounds() {
-    // Multiple trait bounds can be added using `+` operator.
-    // ex: PartialEq and Clone traits from std lib
+    // Multiple trait bounds can be added using `+` operator
+    // e.g. PartialEq and Clone traits from std lib
 
     fn combine_1(x: impl PartialEq + Clone) -> bool {
         let y = x.clone();
@@ -80,7 +80,19 @@ fn multiple_trait_bounds() {
     }
 }
 
-fn trait_bounds() {
+fn optional_trait_bounds() {
+    /*
+        - Optional trait bounds can be added using `?` operator (only works with `Sized` trait)
+    */
+
+    // e.g. PartialEq, Sized traits from std lib
+    fn combine_1(x: impl Clone + ?Sized) -> impl Clone + ?Sized {
+        let y = x.clone();
+        y
+    }
+}
+
+fn trait_bounds_examples() {
     fn combine<T: PartialEq + Clone>(x: T) -> bool {
         let y = x.clone();
         x == y

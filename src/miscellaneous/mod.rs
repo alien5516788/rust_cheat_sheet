@@ -1,5 +1,4 @@
 pub mod associated_types_vs_generic_traits;
-pub mod closure_syntax;
 pub mod generics_as_infinite_types;
 pub mod polymorphism;
 pub mod statically_and_dynamically_sized_types;

@@ -2,319 +2,130 @@
 // =========
 
 /*
-   - Functions defines behaviours
-   - Rust supports two types of functions
-       1. Functions
-       2. Closures (Anonymous functions)
+    - Functions define behaviors
+        - They encapsulate logic that can be executed
+    - Functions cannot be overloaded
+        - It would lead to ambiguity and confusion
+        - Overloading is usually done through traits and generics
+    - Functions are actually a kind of type apart from structs
+        - Every function has a concrete type like `fn(i32) -> i32`
+        - They aren’t structs, but they are first-class types
+    - Functions can implement custom traits just like structs but under certain conditions
+        - You cannot directly implement a trait on a built-in function pointer type due to Rust’s orphan rules
+        - You can wrap the function in a struct and implement traits on that wrapper
+    - Functions can be thought of as `callable` types
+        - Rust provides `Fn`, `FnMut`, `FnOnce` traits that functions automatically implement (compiler magic)
+    - Rust supports two types of functions
+        1. Functions
+        2. Closures (Anonymous functions)
 */
 
 fn functions() {
-    // Functions can be nested
-    // Cannot be overloaded
+    /*
+        - Syntax: `fn(Type) -> ReturnType`
+    */
 
-    // Functions evaluate to unit type by default
-    fn function1() {}
-    fn function2() -> () {}
-    fn function3() {
+    /*
+        - Functions evaluate to unit type by default (curly braces do)
+    */
+    fn function_1() {}
+    fn function_2() -> () {}
+    fn function_3() {
         2;
     }
-    fn function4() -> () {
+    fn function_4() -> () {
         2;
     }
-    fn function5() -> () {
+    fn function_5() -> () {
         2;
         () // note no semicolon
     }
-    fn function6() -> () {
+    fn function_6() -> () {
         return (); // explicit evalaution with return
     }
 
-    // Function with custom return type
-    fn function7() -> i32 {
+    /*
+        - Function with custom return type
+    */
+    fn function_7() -> i32 {
         2 // note no semicolon
     }
 
-    fn function8() -> i32 {
+    fn function_8() -> i32 {
         return 2;
     }
 
-    // Function with parameters
-    fn function9(a: i32, b: i32) -> i32 {
+    /*
+        - Function with parameters
+    */
+    fn function_9(a: i32, b: i32) -> i32 {
         return a + b;
     }
 
-    fn function10(a: i32, b: i32, name: String) -> i32 {
+    fn function_10(a: i32, b: i32, name: String) -> i32 {
         println!("Hello {}", name);
         return a + b;
     }
 
-    // Function call
-    function1();
-    _ = function9(2, 4);
+    /*
+        - Function call
+    */
+    function_1();
+    let _s = function_9(2, 4);
 }
 
 fn function_pointers() {
-    // Functions can be used as objects via pointers
-    // But actual function code is never duplicated
+    /*
+        - Functions can be used as objects via pointers
+        - Actual function code is never duplicated or owned
+    */
     fn speak(name: String) -> () {
         println!("Hello {}", name);
     }
 
-    // Here function doesn't get owned from `speak`
-    let speak_ptr: fn(String) = speak; // `fn(String)` is function signature/type
-
-    // Call
+    let speak_ptr: fn(String) = speak; // here function doesn't get owned from `speak`
     speak_ptr(String::from("Name"));
-}
 
-// ================================== TODO
-
-// Closures
-// ========
-
-fn closures() {
-    // Anonymous functions
-    let fun = |name: String| {
+    // Example 1
+    fn print_name(name: String) -> () {
         println!("Hello {}", name);
-    };
+    }
 
-    let fun_ptr: fn(String) = fun;
+    let _print_name_ptr: fn(String) = print_name;
 
-    fun(String::from("Name"));
-    fun_ptr(String::from("Name"));
+    // Example 2
+    fn return_sum(num1: i32, num2: i32) -> i32 {
+        num1 + num2
+    }
 
-    // Captures the environment state
-    let mut _num: i32 = 0; // Some variable from environment
+    let _return_sum_ptr: fn(i32, i32) -> i32 = return_sum;
 
-    let mut print_num = |num| {
-        // TODO: function signature
-        println!("Hello {}", _num);
-        _num += num;
-    };
+    // Example 3
+    fn return_clone<T: Clone>(t: T) -> T {
+        t.clone()
+    }
 
-    print_num(1); // output: 1
-    print_num(2); // output: 3
+    let _return_clone_ptr: fn(String) -> String = return_clone; // function signature doesn't contain generic type
+
+    // Example 4
+    fn return_sum_ptr() -> fn(i32, i32) -> i32 {
+        |num1: i32, num2: i32| num1 + num2
+    } // this function returns a function pointer (don't get confused by the signature)
+
+    /*
+        - As functions by default implements Fn, FnMut, or FnOnce traits,
+            functions can be passed via trait objects
+        - Note: These are not function pointers
+    */
+    fn return_sum_fn(num1: i32, num2: i32) -> i32 {
+        num1 + num2
+    }
+
+    let _return_sum_fn_ptr1: &dyn Fn(i32, i32) -> i32 = &return_sum_fn;
+    let _return_sum_fn_ptr2: &dyn FnMut(i32, i32) -> i32 = &return_sum_fn;
+    let _return_sum_fn_ptr3: &dyn FnOnce(i32, i32) -> i32 = &return_sum_fn;
+    
+    /*
+        - `Fn(i32, i32)` this function like trait syntax is actually a syntactic sugar for `Fn<(i32, i32), Output = i32>`
+    */
 }
-
-// Closures & move Keyword TODO
-// ========================
-
-/*
-    Closures are anonymous functions that can capture
-        variables from their surrounding environment.
-
-    Syntax:
-        let c = |params| { body };
-
-    Closures automatically decide how to capture variables:
-        - &T       (immutable borrow)
-        - &mut T   (mutable borrow)
-        - T        (move / ownership)
-
-    The `move` keyword forces capture by value.
-*/
-
-fn normal_closure_capture() {
-    /*
-        Without `move`,
-            Rust captures variables in the least restrictive way.
-    */
-
-    let x = 10; // Copy type
-
-    let c = || {
-        println!("x = {}", x);
-    };
-
-    /*
-        x is captured by immutable reference (&x)
-            because we only read it.
-    */
-
-    c();
-    println!("Still usable: {}", x); // Works
-}
-
-fn closure_mutable_capture() {
-    /*
-        If closure modifies a variable,
-            Rust captures by mutable reference (&mut T)
-    */
-
-    let mut count = 0;
-
-    let mut increment = || {
-        count += 1;
-    };
-
-    increment();
-    increment();
-
-    println!("count = {}", count);
-}
-
-fn closure_move_capture() {
-    /*
-        `move` forces capture by value.
-
-        The closure takes ownership
-            of variables it uses.
-    */
-
-    let s = String::from("Hello");
-
-    let c = move || {
-        println!("{}", s);
-    };
-
-    c();
-
-    /*
-        s is moved into closure.
-        Cannot use s here anymore.
-    */
-    // println!("{}", s); // ERROR
-}
-
-fn move_with_copy_types() {
-    /*
-        If the captured type implements Copy,
-            it is copied instead of moved.
-    */
-
-    let x = 5; // i32 is Copy
-
-    let c = move || {
-        println!("{}", x);
-    };
-
-    c();
-
-    /*
-        x still usable,
-            because it was copied.
-    */
-    println!("Still usable: {}", x);
-}
-
-fn partial_capture_example() {
-    /*
-        Closure captures only variables it actually uses.
-    */
-
-    let a = String::from("A");
-    let b = String::from("B");
-
-    let c = move || {
-        println!("{}", a);
-    };
-
-    /*
-        Only `a` is moved.
-        `b` is untouched.
-    */
-
-    println!("{}", b); // Works
-    c();
-}
-
-fn thread_usage() {
-    use std::thread;
-
-    /*
-        Threads require 'static closures.
-
-        That means:
-            The closure must own everything it uses.
-
-        Therefore, `move` is almost always required.
-    */
-
-    let s = String::from("Hello from thread");
-
-    let handle = thread::spawn(move || {
-        println!("{}", s);
-    });
-
-    /*
-        s is moved into thread.
-        Main thread cannot use it anymore.
-    */
-
-    handle.join().unwrap();
-}
-
-fn thread_multiple_values() {
-    use std::thread;
-
-    /*
-        All used variables are moved
-            into the closure.
-    */
-
-    let name = String::from("Alien");
-    let age = 20;
-
-    let handle = thread::spawn(move || {
-        println!("{} is {}", name, age);
-    });
-
-    /*
-        name is moved (String)
-        age is copied (i32 is Copy)
-    */
-
-    handle.join().unwrap();
-}
-
-fn arc_example_with_move() {
-    use std::sync::Arc;
-    use std::thread;
-
-    /*
-        move does NOT clone automatically.
-
-        If multiple threads need ownership,
-            you must clone explicitly.
-    */
-
-    let data = Arc::new(5);
-
-    let data2 = Arc::clone(&data);
-
-    let handle = thread::spawn(move || {
-        println!("{}", data2);
-    });
-
-    /*
-        data still usable,
-            because Arc was cloned.
-    */
-
-    println!("{}", data);
-
-    handle.join().unwrap();
-}
-
-/*
-    Important Notes
-    ===============
-
-    1. `move` affects how variables are captured,
-        not how they are used inside the closure.
-
-    2. `move` does NOT move everything in scope.
-        Only variables actually used are captured.
-
-    3. Closure trait implementation depends on usage:
-
-        - If it only reads -> Fn
-        - If it mutates    -> FnMut
-        - If it consumes   -> FnOnce
-
-    4. `move` does NOT automatically make a closure FnOnce.
-        It depends on how captured values are used.
-
-    5. Threads require move because:
-        Borrowed references may not live long enough.
-*/

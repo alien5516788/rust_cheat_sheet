@@ -66,3 +66,63 @@ fn main() {
         "- &ConcreteType -> &dyn Trait (trait object reference) -> fat pointer (ptr + vtable)"
     );
 }
+
+fn main() {
+    // =========================================================================
+    // 1. COERCION (Implicit Conversion)
+    // The compiler does this automatically at "coercion sites."
+    // These are always safe and usually involve pointers/references.
+    // =========================================================================
+    
+    let my_string: String = String::from("Hello Rust");
+
+    // DEREF COERCION: 
+    // The function expects &str, but we give it &String.
+    // Rust implicitly calls .deref() because String implements Deref<Target = str>.
+    print_message(&my_string); 
+
+    let mut mutable_value: i32 = 10;
+    
+    // MUTABILITY COERCION:
+    // We create a mutable reference, but coerce it into an immutable one.
+    let coerced_ref: &i32 = &mut mutable_value; 
+    println!("Coerced immutable ref: {}", coerced_ref);
+
+
+    // =========================================================================
+    // 2. CASTING (Explicit Conversion via `as`)
+    // You must use the 'as' keyword. This can be "lossy" (data can change).
+    // =========================================================================
+    
+    let decimal: f64 = 65.99;
+
+    // NUMERIC CAST:
+    // Rust will NEVER implicitly turn a float into an int.
+    // We must explicitly cast. Note: This truncates the decimal!
+    let integer = decimal as u8; 
+    
+    // CHAR CAST:
+    // Integers can be cast to chars (if they represent a valid Unicode point).
+    let character = integer as char; 
+
+    println!("Casting: {} -> {} -> {}", decimal, integer, character);
+
+
+    // =========================================================================
+    // 3. CONVERSION (Explicit Conversion via Traits)
+    // The idiomatic "Rust way" for complex types using .into() or From::from().
+    // =========================================================================
+    
+    let original_str: &str = "Type Conversion";
+
+    // .into() is explicit but more "semantic" than a raw 'as' cast.
+    // It consumes the original or creates a new owned version.
+    let owned_string: String = original_str.into();
+
+    println!("Converted to owned String: {}", owned_string);
+}
+
+/// A function expecting a string slice (&str)
+fn print_message(msg: &str) {
+    println!("Message: {}", msg);
+}

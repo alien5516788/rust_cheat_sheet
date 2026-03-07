@@ -1,10 +1,12 @@
-pub mod nightly;
-pub mod advanced_traits;
 pub mod async_await;
 pub mod blanket_implementation;
+pub mod default_type_for_generics;
+pub mod generic_implementations;
+pub mod generics_extra;
 pub mod n1_generics;
 pub mod n2_trait_bounds;
 pub mod n3_trait_objects;
 pub mod n4_lifetime_bounds;
-pub mod phantom_data;
+pub mod nightly;
+pub mod traits_extra;
 pub mod zero_sized_types;

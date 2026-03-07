@@ -1,22 +1,17 @@
-// Generics
-// ========
-
 /*
-    Rust have 3 main kinds or generics
+    - Rust have 3 main kinds or generics
         1. Type generics
         2. Const generics
         3. Life time generics
-
-    Generics allows mutiple concrete types to be created out of generic types
-
-    By default generics use static dispatch
+    - Generics allows mutiple concrete types to be created out of generic types
+    - By default generics use static dispatch
 */
 
 /*
-    Generic Kind	  Trait Bounds	 Trait Objects	 Lifetime Bounds
-    Type (T)	        Yes	            Yes	               Yes
-    Const (N)	        No	            No	               No
-    Lifetime ('a)	    No	            No	               Yes
+    Generic Kind	 Trait Bounds	 Trait Objects	  Lifetime Bounds
+    Type (T)	         Yes	          Yes	            Yes
+    Const (N)	         No	              No	            No
+    Lifetime ('a)	     No	              No	            Yes
 */
 
 fn type_generics() {
@@ -40,8 +35,9 @@ fn type_generics() {
 }
 
 fn const_generics() {
-    // Const generics support only integer types, bool, char, and references to them
-
+    /*
+        - Const generics support only integer types, bool, char, and references to them
+    */
     fn return_value<T, const U: i32>(_arg1: T) -> i32 {
         34 + U
     }
@@ -70,7 +66,6 @@ fn lifetime_generics() {
         - Life time generic is always applied on references
     */
 
-    // Example 1
     fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
         /*
             - 'a ties input and output references together
@@ -94,108 +89,5 @@ fn lifetime_generics() {
 
     trait Printer<'a> {
         fn print(&self, s: &'a str);
-    }
-}
-
-// Default type for type generics
-// =========================
-
-fn default_type() {
-    // Default type for generic parameter are not supported for functions
-
-    struct Item<T, U = f32> {
-        t: T,
-        l: U,
-    }
-
-    enum Output3<T, U = f32> {
-        Value1(T),
-        Value2(U),
-    }
-
-    trait MyTrait<T = i32> {
-        fn do_something(&self, value: T);
-    }
-}
-
-// Generic implementations
-// =======================
-
-fn implementing_generics_traits_and_structs() {
-    // Generic struct
-    /*
-        Generic struct allows multiple implementations
-            for different concrete types of same struct.
-
-        There is a thing to watchout.
-            when there is a universal implementation, functions or methods cannot be
-            redundant in concrete implementations as they would overlap with the universal implementation.
-
-        Structs still can have multiple implementation blocks for the same concrete type,
-            as long as they are not redundant.
-    */
-    struct Container<T> {
-        item: T,
-    }
-
-    // Generic impl for all T
-    impl<U> Container<U> {
-        fn new(item: U) -> Self {
-            Self { item }
-        }
-
-        fn get_item(&self) -> &U {
-            &self.item
-        }
-    }
-
-    // Specialized impl for specific type
-    impl Container<i32> {
-        fn double(&self) -> i32 {
-            self.item * 2
-        }
-    }
-
-    // Generic trait
-    /*
-        Generic trait allows multiple implementations
-            for the same type but with different type parameter.
-
-        There is also a thing to watchout.
-            When there is a universal implementation, there cannot be implementations
-            for any concrete types and vice versa. Becuase they would overlap with the universal implementation.
-
-        Traits still have to be fully implemented in one block.
-    */
-    trait Interact<T> {
-        fn interact(&self, value: T);
-    }
-
-    struct Robot {
-        id: i32,
-    }
-
-    // Implementing generic trait for concrete type
-    // Either universal implementation or concrete implementations can present, not both
-    /*
-        impl<U> Interact<U> for Robot {
-            fn interact(&self, value: U) {
-                println!("Robot {} received a message", self.id);
-            }
-        }
-    */
-
-    // Implementing generic trait for concrete type
-    impl Interact<String> for Robot {
-        fn interact(&self, value: String) {
-            println!("Robot {} received message: {}", self.id, value);
-        }
-    }
-
-    // Implementing same trait but different type parameter
-    impl Interact<i32> for Robot {
-        fn interact(&self, value: i32) {
-            println!("Robot {} received number: {}", self.id, value);
-        }
     }
 }

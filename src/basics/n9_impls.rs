@@ -1,44 +1,54 @@
-// Impls
-// =====
-
 /*
-    - Used to define behaviours for structs,
-        as well as implementations for traits.
-    - Methods are just functions inside an impl block.
-    - There can be multiple impl blocks for the same type.
-    - Impl blocks do not store data, only behaviour.
+    - Used to define behaviours and shared behaviours (traits) for structs
+    - Methods are just functions inside an impl block
+    - There can be multiple impl blocks for the same type
+    - Impl blocks do not store data, only behaviours
 */
 
 fn implementing_behaviours() {
+    /*
+        - A struct can have multiple impl blocks
+    */
+
+    // Struct definition
     struct Person {
         name: String,
         age: i32,
     }
 
-    // Can have multiple implementation blocks
+    // Example 1
     impl Person {
-        // Method
-        // must have self / &self / &mut self as first parameter
         fn speak(&self) {
+            /*
+                - Method
+                - must have self / &self / &mut self as first parameter
+            */
             println!("I am a person");
         }
 
-        // Associated function (no self)
-        // Often used as constructor
         fn new(name: String, age: i32) -> Self {
+            /*
+                - Associated function (no self)
+                - Fact: `new` is often used as a constructor
+            */
             Person { name, age }
         }
 
-        // Associated function
-        // doesn't have a reference to self
         fn eat() {
+            /*
+                - Associated function
+                - doesn't have a reference to self
+            */
             println!("Yum Yum");
         }
     }
 
+    // Example 2
     impl Person {
-        // Method
         fn update_name(&mut self) {
+            /*
+               - Method
+            */
             self.name = String::from("Other Name");
         }
 
@@ -50,7 +60,7 @@ fn implementing_behaviours() {
 
     // Accessing functions and methods
     /*
-        Methods can be accessed by dot syntax,
+        - Methods can be accessed by dot syntax,
             as well as colon syntax by explicitly passing self
     */
     let mut person = Person::new(String::from("John"), 30);
@@ -62,8 +72,8 @@ fn implementing_behaviours() {
     Person::speak(&person);
 
     /*
-        Associated functions can only be accessed
-        using :: syntax
+        - Associated functions can only be accessed
+            using :: syntax
     */
     Person::eat();
 }

@@ -1,6 +1,3 @@
-// Functions
-// =========
-
 /*
     - Functions define behaviors
         - They encapsulate logic that can be executed
@@ -25,9 +22,8 @@ fn functions() {
         - Syntax: `fn(Type) -> ReturnType`
     */
 
-    /*
-        - Functions evaluate to unit type by default (curly braces do)
-    */
+    // Example 1
+    // Functions evaluate to unit type by default (curly braces do)
     fn function_1() {}
     fn function_2() -> () {}
     fn function_3() {
@@ -44,9 +40,8 @@ fn functions() {
         return (); // explicit evalaution with return
     }
 
-    /*
-        - Function with custom return type
-    */
+    // Example 2
+    // Function with custom return type
     fn function_7() -> i32 {
         2 // note no semicolon
     }
@@ -55,9 +50,8 @@ fn functions() {
         return 2;
     }
 
-    /*
-        - Function with parameters
-    */
+    // Example 3
+    // Function with parameters
     fn function_9(a: i32, b: i32) -> i32 {
         return a + b;
     }
@@ -79,6 +73,8 @@ fn function_pointers() {
         - Functions can be used as objects via pointers
         - Actual function code is never duplicated or owned
     */
+
+    // Function definition
     fn speak(name: String) -> () {
         println!("Hello {}", name);
     }
@@ -117,6 +113,8 @@ fn function_pointers() {
             functions can be passed via trait objects
         - Note: These are not function pointers
     */
+
+    // Example
     fn return_sum_fn(num1: i32, num2: i32) -> i32 {
         num1 + num2
     }
@@ -124,7 +122,7 @@ fn function_pointers() {
     let _return_sum_fn_ptr1: &dyn Fn(i32, i32) -> i32 = &return_sum_fn;
     let _return_sum_fn_ptr2: &dyn FnMut(i32, i32) -> i32 = &return_sum_fn;
     let _return_sum_fn_ptr3: &dyn FnOnce(i32, i32) -> i32 = &return_sum_fn;
-    
+
     /*
         - `Fn(i32, i32)` this function like trait syntax is actually a syntactic sugar for `Fn<(i32, i32), Output = i32>`
     */

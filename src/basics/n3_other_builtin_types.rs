@@ -1,6 +1,3 @@
-// Other Built-in Types
-// ====================
-
 fn tuple() {
     /*
         - Heterogeneous

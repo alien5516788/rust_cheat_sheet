@@ -1,6 +1,3 @@
-// Enums
-// =====
-
 /*
     - Enums defines types that have fixed set of type variants
     - They are like containers for multiple struct types
@@ -23,6 +20,9 @@ fn enums() {
         location: String::from("home"),
     };
 
+    // Destructuring
+
+    // Example 1
     // Destructuring via pattern matching
     // All possible variants should be matched
     match &_state {
@@ -34,6 +34,7 @@ fn enums() {
         }
     }
 
+    // Example 2
     // Destructuring via if let
     // Unnecessary variants can be ignored
     if let GameState::Paused(begin, _) = _state {

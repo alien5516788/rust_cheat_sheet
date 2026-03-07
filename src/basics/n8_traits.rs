@@ -1,15 +1,12 @@
-// Traits
-// ======
-
-/*
-   - Traits defines behaviours
-   - Similar to a struct but for methods
-   - Unlike structs standalone objects cannot be created with traits,
-       instead they should be implemented on structs
-   - Traits are the fundamental way of doing polymorphism in rust
-*/
-
 fn traits() {
+    /*
+       - Traits defines shared behaviours
+       - Similar to a struct but for methods
+       - Unlike structs standalone objects cannot be created with traits,
+           instead they should be implemented on structs
+       - Traits are the fundamental way of doing polymorphism in rust
+    */
+
     // Trait definition
     trait Move {
         fn walk(); // contains method signature
@@ -21,7 +18,6 @@ fn traits() {
         } // can have a default implementation
     }
 
-    // Trait implementation
     struct Person {
         name: String,
         age: i32,

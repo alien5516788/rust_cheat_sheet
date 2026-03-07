@@ -1,6 +1,3 @@
-// Primitives
-// ==========
-
 fn unit_type() {
     /*
         - A type similar to void

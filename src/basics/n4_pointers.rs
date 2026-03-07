@@ -1,6 +1,3 @@
-// Pointers
-// ========
-
 /*
     - In Rust, a "pointer" is any type that refers to data elsewhere
     - They differ by ownership, mutability, lifetime tracking, and safety
@@ -34,9 +31,10 @@ fn references() {
 
 fn raw_pointers() {
     /*
-        - Mostly exists for c compatibility. Rarely used
-            - Unlimited number of mutable or immutable pointers allowed
-            - Need an `unsafe` block to dereference
+        - Mostly exists for c compatibility and low level hacks
+        - Rarely used
+        - Unlimited number of mutable or immutable pointers allowed
+        - Need an `unsafe` block to dereference
         - Note: & symbol returns memory address
     */
     let mut num1 = 32;

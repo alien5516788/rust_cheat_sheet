@@ -1,6 +1,3 @@
-// Structs
-// =======
-
 /*
     - Structs define types
     - There are 3 types of structs

@@ -2,12 +2,9 @@
 
 fn closures() {
     /*
-        - Syntax: `|Type| -> ReturnType`
-    */
-
-    /*
         - Closure are anonymous functions that can capture variables from their surrounding environment
         - Closures are actually structs that implement the `Fn`, `FnMut`, or `FnOnce` traits
+        - Syntax: `|Type| -> ReturnType`
     */
     let function_1 = || {};
     let _function_2 = || -> () {};
@@ -49,9 +46,8 @@ fn closure_capture() {
         - Without `move` closure captures variables in the least restrictive way
     */
 
-    /*
-        - If closure reads a variable, closure captures by immutable reference (&T)
-    */
+    // Example 1
+    // If closure reads a variable, closure captures by immutable reference (&T)
     let x = 10;
 
     let capture = || {
@@ -61,9 +57,8 @@ fn closure_capture() {
     capture();
     println!("Still usable: {}", x); // works
 
-    /*
-        - If closure modifies a variable, closure captures by mutable reference (&mut T)
-    */
+    // Example 2
+    // If closure modifies a variable, closure captures by mutable reference (&mut T)
     let x = 10;
     let mut count = 0;
 
@@ -76,9 +71,8 @@ fn closure_capture() {
     println!("Still usable: {}", x); // works
     println!("Still usable: {}", count); // works
 
-    /*
-        - If closure forces move with `move`, closure takes ownership of variables it uses
-    */
+    // Example 3
+    // If closure forces move with `move`, closure takes ownership of variables it uses
     let s = String::from("Hello");
 
     let capture = move || {
@@ -88,9 +82,8 @@ fn closure_capture() {
     capture();
     // println!("{}", s); // error
 
-    /*
-        - If the captured type implements Copy trait, it is copied instead of moved.
-    */
+    // Example 4
+    // If the captured type implements Copy trait, it is copied instead of moved
     let x = 5; // Copy
     let y = String::from("hello"); // no Copy
 
@@ -112,6 +105,8 @@ fn closures_for_threads() {
         - That means the closure must own everything it uses
         - Therefore, `move` is almost always required.
     */
+
+    // Example
     let name = String::from("Alien");
     let age = 20;
 
@@ -149,17 +144,17 @@ fn type_annotations_for_closures() {
         - Instead `Fn`, `FnMut`, `FnOnce` traits can be used to annotate closures with trait objects
     */
 
-    /*
-        - Immutable borrow
-    */
+    // Example 1
+    // Immutable borrow
     let x = 10;
 
     let _capture: &dyn Fn() = &|| {
         println!("x = {}", x);
     };
 
+    // Example 2
+    // Mutable borrow
     /*
-        - Mutable borrow
         - `mut` is required here because the closure captures is a struct and
             struct fields for captured variables are mutable, so struct/closure itself should be mutable
     */
@@ -170,10 +165,9 @@ fn type_annotations_for_closures() {
         count += x;
     };
 
-    /*
-        - Move
-        - Trait object cannot be a shared reference, because calling FnOnce takes ownership
-    */
+    // Example 3
+    // Move
+    // Trait object cannot be a shared reference, because calling FnOnce takes ownership
     let s = String::from("Hello");
 
     let _capture_once: Box<dyn FnOnce()> = Box::new(move || {

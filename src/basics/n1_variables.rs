@@ -51,12 +51,12 @@ fn variables() {
         - Variable names can be prefixed with `_` to indicate they are unused (e.g. `_var`)
     */
     let _ = 34;
-    _ = 34;
+    _ = 64;
 
     let _var = 33;
 }
 
-fn statements_expressions() {
+fn statements_and_expressions() {
     /*
         - Expressions evaluate to a value and can be used in statements
     */
@@ -93,4 +93,26 @@ fn statements_expressions() {
     {
         8 + 9
     }; // evaluates to `()`
+}
+
+fn assignments() {
+    /*
+        - Variable can be used to assign final values evaluated from statements or expressions
+    */
+
+    // Example 1
+    // `x` is assigned the value of `42`
+    let x = 42;
+
+    // Example 2
+    // `y` is assigned the value of `x + 1`, which is `43`
+    let y = x + 1;
+
+    // Example 3
+    // `_z` is assigned the value evaluated from the block expression
+    let _z = {
+        let a = 4;
+        let b = 5;
+        a + b + y
+    };
 }

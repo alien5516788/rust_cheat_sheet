@@ -64,11 +64,19 @@ fn const_generics() {
 }
 
 fn lifetime_generics() {
-    // Life time generics on functions define the lifetime of the arguments and return value
-    // Life time generics on other items define the lifetime of attributes and items themselves
+    /*
+        - Life time generics on functions define the lifetime of the arguments and return value
+        - Life time generics on other items define the lifetime of attributes and items themselves
+        - Life time generic is always applied on references
+    */
 
-    fn largest<'a>(x: &'a i32, y: &'a i32) -> &'a i32 {
-        if x > y {
+    // Example 1
+    fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        /*
+            - 'a ties input and output references together
+            - Meaning: The returned reference lives at least as long as both inputs
+        */
+        if x.len() > y.len() {
             x
         } else {
             y

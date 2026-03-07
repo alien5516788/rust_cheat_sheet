@@ -1,7 +1,10 @@
-pub mod advanced_generics;
-pub mod associated_types;
+pub mod nightly;
+pub mod advanced_traits;
 pub mod async_await;
-pub mod generics;
-pub mod lifetime_bounds;
-pub mod trait_bounds;
-pub mod trait_objects;
+pub mod blanket_implementation;
+pub mod n1_generics;
+pub mod n2_trait_bounds;
+pub mod n3_trait_objects;
+pub mod n4_lifetime_bounds;
+pub mod phantom_data;
+pub mod zero_sized_types;

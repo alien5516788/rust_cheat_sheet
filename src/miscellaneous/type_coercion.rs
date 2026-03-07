@@ -1,6 +1,6 @@
 use std::mem::size_of;
 
-fn main() {
+fn coercion1() {
     println!("=== 1️⃣ Array to Slice Coercion ===");
 
     let arr: [i32; 5] = [10, 20, 30, 40, 50];
@@ -67,52 +67,50 @@ fn main() {
     );
 }
 
-fn main() {
+fn coercion2() {
     // =========================================================================
     // 1. COERCION (Implicit Conversion)
     // The compiler does this automatically at "coercion sites."
     // These are always safe and usually involve pointers/references.
     // =========================================================================
-    
+
     let my_string: String = String::from("Hello Rust");
 
-    // DEREF COERCION: 
+    // DEREF COERCION:
     // The function expects &str, but we give it &String.
     // Rust implicitly calls .deref() because String implements Deref<Target = str>.
-    print_message(&my_string); 
+    print_message(&my_string);
 
     let mut mutable_value: i32 = 10;
-    
+
     // MUTABILITY COERCION:
     // We create a mutable reference, but coerce it into an immutable one.
-    let coerced_ref: &i32 = &mut mutable_value; 
+    let coerced_ref: &i32 = &mut mutable_value;
     println!("Coerced immutable ref: {}", coerced_ref);
-
 
     // =========================================================================
     // 2. CASTING (Explicit Conversion via `as`)
     // You must use the 'as' keyword. This can be "lossy" (data can change).
     // =========================================================================
-    
+
     let decimal: f64 = 65.99;
 
     // NUMERIC CAST:
     // Rust will NEVER implicitly turn a float into an int.
     // We must explicitly cast. Note: This truncates the decimal!
-    let integer = decimal as u8; 
-    
+    let integer = decimal as u8;
+
     // CHAR CAST:
     // Integers can be cast to chars (if they represent a valid Unicode point).
-    let character = integer as char; 
+    let character = integer as char;
 
     println!("Casting: {} -> {} -> {}", decimal, integer, character);
-
 
     // =========================================================================
     // 3. CONVERSION (Explicit Conversion via Traits)
     // The idiomatic "Rust way" for complex types using .into() or From::from().
     // =========================================================================
-    
+
     let original_str: &str = "Type Conversion";
 
     // .into() is explicit but more "semantic" than a raw 'as' cast.

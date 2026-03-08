@@ -11,7 +11,7 @@ fn traits() {
     trait Move {
         fn walk(); // contains method signature
 
-        fn run(&self);
+        fn run(&self); // `&self` is syntactic sugar for `self: &Self`
 
         fn fly(&self) {
             println!("I'm flying ...");

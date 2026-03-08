@@ -27,6 +27,15 @@ fn references() {
     // Dereferencing references
     let _ref_val: i32 = *ref1;
     let _mut_ref_val: i32 = *mut_ref1;
+
+    // Destructuring references
+    let num = 32;
+
+    let num_val1: &i32 = &num;
+    println!("{:p}", num_val1); // this prints memory address
+
+    let &num_val2: &i32 = &num;
+    // println!("{:p}", num_val2); // error: `num_val2` is destructured and it holds the value
 }
 
 fn raw_pointers() {

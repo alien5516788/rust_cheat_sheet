@@ -1,6 +1,7 @@
-fn for_loop() {
+fn for_loops() {
     /*
        - Repeatedly run a logical block of code by iterating over a range or collection
+       - For loop is mostly a sugar for `Iterator` trait
     */
 
     // Example 1

@@ -113,6 +113,13 @@ fn assignments() {
     let _z = {
         let a = 4;
         let b = 5;
-        a + b + y
+        a + b + y // note: no semicolon, so it evaluates to `52`
+    };
+
+    // Example 4
+    let _z = {
+        let a = 4;
+        let b = 5;
+        a + b + y; // note: semicolon, so it evaluates to `()`
     };
 }

@@ -1,9 +1,9 @@
-/*
-    - Enums defines types that have fixed set of type variants
-    - They are like containers for multiple struct types
-*/
-
 fn enums() {
+    /*
+        - Enums defines types that have fixed set of type variants
+        - They are like containers for multiple struct types
+    */
+
     enum GameState {
         Play,             // unit variant
         Paused(i32, i32), // tuple variant

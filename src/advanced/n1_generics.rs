@@ -130,11 +130,11 @@ pub mod types_of_generics {
 
         // Example 4
         /*
-            - Constant value for the `O` parameter is determined by trait implementation
+            - Constant value for the `A` parameter is determined by trait implementation
         */
-        trait FindLocation<const O: i32> {
+        trait FindLocation<const A: i32> {
             fn is_existing(&self, location: i32) -> bool {
-                return location + O > 10;
+                return location + A > 10;
             }
         }
 
@@ -149,15 +149,23 @@ pub mod types_of_generics {
         - Life time generics on functions define the lifetime of the arguments and return value
         - Life time generics on other items define the lifetime of attributes and items themselves
         - Always applied on references
+        - Note: There is also an special lifetime parameter `'static` apart from custom
+            lifetime parameters like `'a`, `'b`, `'c`, etc
+        - `'static` indicates that the value has a lifetime that is the entire duration of the program
+        - Variables initialized with static keyword will have a `'static` lifetime
     */
-    // TODO: Complete examples and add `'static` lifetime example
     fn lifetime_generics() {
         // Example 1
         /*
             - 'a ties input and output references together
             - Both `x` and `y` must live at least as long as both input references
+            - Without `'a`, compiler cannot guarantee that the lifetime of return value is consistent
+                and will result in a compile error
         */
-        fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        let x = String::from("hello");
+        let y = String::from("world");
+
+        fn longest<'a>(x: &'a String, y: &'a String) -> &'a String {
             if x.len() > y.len() {
                 x
             } else {
@@ -165,9 +173,41 @@ pub mod types_of_generics {
             }
         }
 
+        longest(&x, &y);
+
         // Example 2
         /*
-            - Both `name` and `title` must live at least as long as both references
+            - Here `x` and `y` have different lifetimes
+            - `y` has a shorter lifetime than `x`
+            - If the `result` is used later in program, `y` will have already gone out of scope
+                and compiler will throw an error
+        */
+        let x = String::from("hello");
+
+        fn shortest<'a>(x: &'a String, y: &'a String) -> &'a String {
+            if x.len() < y.len() {
+                x
+            } else {
+                y
+            }
+        }
+
+        let result;
+
+        {
+            let y = String::from("world");
+            result = shortest(&x, &y);
+            // Becuase `y` goes out of scope before `result` is used
+        }
+
+        // println!("{}", result); // error
+
+        // Example 3
+        /*
+            - The struct `Holder` cannot outlive the references it contains
+            - If `name` or `title` are dropped, the `Holder` instance becomes invalid
+            - Both `name` and `title` are tied to the same lifetime 'a, meaning
+                the struct's lifetime is limited by whichever is shorter
         */
         struct Holder<'a> {
             name: &'a str,
@@ -175,9 +215,27 @@ pub mod types_of_generics {
             age: i32,
         }
 
-        // Example 3
+        let name = String::from("Alice");
+        let holder;
+
+        {
+            let title = String::from("Manager");
+            holder = Holder {
+                name: &name,
+                title: &title,
+                age: 30,
+            };
+            // title goes out of scope here
+        }
+
+        // println!("{}", holder.title); // error
+
+        // Example 4
         /*
-            - References inside `Text` and `Number` must live at least as long as the reference passed in
+            - The lifetime 'a ensures that if a `Message` variant holds a reference,
+                that reference must remain valid for the life of the enum instance
+            - If you try to move a `Message::Text` into a scope where the original
+                string is gone, the compiler will block it
         */
         enum Message<'a> {
             Text(&'a str),
@@ -185,12 +243,47 @@ pub mod types_of_generics {
             Flag(bool),
         }
 
-        // Example 4
+        let msg;
+        let text = String::from("Hello");
+        msg = Message::Text(&text);
+
+        // Example 5
         /*
-            -
+            - Here, 'a specifies that the string slice `s` passed to `print`
+                must live at least as long as the lifetime parameter defined by the trait
+            - This is often used when the implementation of the trait needs to
+                store that reference or use it for a specific duration
         */
         trait Printer<'a> {
             fn print(&self, s: &'a str);
         }
+
+        struct MyPrinter;
+
+        impl<'a> Printer<'a> for MyPrinter {
+            fn print(&self, s: &'a str) {
+                println!("{}", s);
+            }
+        }
+
+        // Example 6
+        /*
+            - `'static` data is usually stored directly in the program's binary
+            - Unlike 'a, it never goes out of scope
+            - A reference to a string literal (e.g., "hello") is implicitly `'static`
+            - `shout` function only accepts references that live for the whole program
+            - The variable name `z` cannot be used as a local variable or anywhere in the program
+                because it shadows the static `z`
+        */
+        fn shout(s: &'static i32) {
+            println!("Number is {}", s);
+        }
+
+        let x = 45;
+        static z: i32 = 78;
+
+        shout(&z);
+        // shout(&x); // error
+        // 'x' is a local String and will be dropped eventually
     }
 }

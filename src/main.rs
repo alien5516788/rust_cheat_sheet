@@ -7,18 +7,23 @@ pub mod miscellaneous;
 
 fn main() {
     
-    // Required method
-    pub trait Clone2: Sized {
-        // Required method
-        fn clone1(&self) -> Self;
-        
-        fn clone2(self: &Self) -> Self;
-        
-        
+    let x = String::from("hello");
+
+    fn shortest<'a>(x: &'a String, y: &'a String) -> &'a String {
+        if x.len() < y.len() {
+            x
+        } else {
+            y
+        }
+    }
+
+    let result;
+
+    {
+        let y = String::from("world");
+        result = shortest(&x, &y);
+    }
     
-        // Provided method
-        fn clone_from(&mut self, source: &Self);
-    } 
-    
+    // println!("{}", result);
     
 }

@@ -44,14 +44,15 @@ pub mod default_type_for_generics {
     }
 
     // 2. Const generics (nightly)
-    // fn const_generics() {
-    //     #![feature(const_generics_defaults)]
+    fn const_generics() {
+        #![feature(const_generics_defaults)] // Enable const generics defaults
 
-    //     struct ArrayWrapper<T, const N: usize = 10> {
-    //         data: [T; N],
-    //     }
+        // Example
+        struct ArrayWrapper<T, const N: usize = 10> {
+            data: [T; N],
+        }
 
-    //     let default_buffer = ArrayWrapper { data: [0; 10] };
-    //     let custom_buffer = ArrayWrapper::<i32, 5> { data: [0; 5] };
-    // }
+        let default_buffer = ArrayWrapper { data: [0; 10] };
+        let custom_buffer = ArrayWrapper::<i32, 5> { data: [0; 5] };
+    }
 }

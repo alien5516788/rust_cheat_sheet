@@ -11,7 +11,7 @@ fn lifetime_bounds() {
     */
 
     // Example 1
-    // Lifetime bounds on lifetime generics
+    // lifetime bounds on lifetime generics
     fn update_list<'a, 'b: 'a>(num: &'a i32, num_list: &'b mut Vec<&'a i32>) {
         /*
             - Describe outlives relationships.
@@ -25,11 +25,10 @@ fn lifetime_bounds() {
     }
 
     // Example 2
-    // Lifetime bounds on types generics
+    // lifetime bounds on types generics
     fn make_tuple<'a, T: 'a>(num1: T, num2: T) -> (T, T) {
         /*
-            Meaning:
-                - Num1 and num2 must live at least as long as `'a` (same lifetime)
+            Meaning `Num1` and `num2` must live at least as long as `'a` (same lifetime)
         */
         (num1, num2)
     }
@@ -40,7 +39,7 @@ fn lifetime_bounds_with_trait_bounds_and_trait_objects() {
         Lifetime bounds can be mixed with trait bounds and trait objects
     */
 
-    // Trait definition
+    // trait definition
     trait Describable {
         fn describe(&self) -> String;
     }

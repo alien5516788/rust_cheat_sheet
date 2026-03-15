@@ -38,3 +38,45 @@ fn print_string(s: &String) {
 fn print_str(s: &str) {
     println!("Printing str slice: {}", s);
 }
+
+pub mod literal_lifetimes {
+    /* @Topic: Literals and Constant Promotion
+        @Insight: Not all literal references are equal. Some are promoted
+                  to 'static, while others are tied to local scopes.
+    */
+
+    pub fn demonstrate_promotion() {
+        /*
+            - CONSTANT PROMOTION: When you take a reference to a literal
+              (like &34), Rust "promotes" it to a static location in the
+              program binary.
+            - This reference effectively has a &'static i32 lifetime.
+        */
+        let promoted: &'static i32 = &34;
+
+        println!("Promoted value: {}", promoted);
+    }
+
+    pub fn demonstrate_non_promotion() {
+        /*
+            - If the literal is used to initialize a variable, that variable
+              is stored on the STACK.
+            - A reference to that variable is NOT 'static; it is tied to
+              the local scope.
+        */
+        let x = 34; // x is on the stack
+        let local_ref = &x; // local_ref has a local lifetime, NOT 'static
+
+        // let invalid: &'static i32 = &x; // Error: x does not live long enough
+
+        println!("Local value: {}", local_ref);
+    }
+
+    pub fn string_literals() {
+        /*
+            - String literals (e.g., "hello") are ALWAYS &'static str.
+            - They are stored directly in the "Data Segment" of the binary.
+        */
+        let s: &'static str = "I am in the binary";
+    }
+}

@@ -15,7 +15,7 @@ pub mod implementing_generics_traits_and_structs {
             item: T,
         }
 
-        // Generic implementation for all types U
+        // generic implementation for all types U
         impl<U> Container<U> {
             fn new(item: U) -> Self {
                 Self { item }
@@ -26,7 +26,7 @@ pub mod implementing_generics_traits_and_structs {
             }
         }
 
-        // Specialized impl for specific type
+        // concrete implementation for i32 type
         impl Container<i32> {
             fn double(&self) -> i32 {
                 self.item * 2
@@ -53,8 +53,8 @@ pub mod implementing_generics_traits_and_structs {
             id: i32,
         }
 
-        // Implementing generic trait for concrete type
-        // Either universal implementation or concrete implementations can present, not both
+        // implementing generic trait for concrete type
+        // either universal implementation or concrete implementations can present, not both
         /*
             impl<U> Interact<U> for Robot {
                 fn interact(&self, value: U) {
@@ -63,14 +63,14 @@ pub mod implementing_generics_traits_and_structs {
             }
         */
 
-        // Implementing generic trait for concrete type
+        // implementing generic trait for concrete type
         impl Interact<String> for Robot {
             fn interact(&self, value: String) {
                 println!("Robot {} received message: {}", self.id, value);
             }
         }
 
-        // Implementing same trait but different type parameter
+        // implementing same trait but different type parameter
         impl Interact<i32> for Robot {
             fn interact(&self, value: i32) {
                 println!("Robot {} received number: {}", self.id, value);

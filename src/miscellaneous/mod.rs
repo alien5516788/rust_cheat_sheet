@@ -1,6 +1,11 @@
 pub mod associated_types_vs_generic_traits;
+pub mod console_output_formatting;
 pub mod generics_as_infinite_types;
+pub mod interior_mutablity;
+pub mod literal_ownership;
 pub mod polymorphism;
+pub mod scope_vs_lifetimes;
+pub mod static_visisbility;
 pub mod statically_and_dynamically_sized_types;
 pub mod str_vs_string_usage;
 pub mod structs_vs_enums;

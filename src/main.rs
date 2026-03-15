@@ -1,4 +1,6 @@
-#![allow(warnings)]
+#![allow(warnings, dead_code)]
+
+use std::marker::PhantomData;
 
 pub mod advanced;
 pub mod basics;
@@ -6,24 +8,16 @@ pub mod flow_control;
 pub mod miscellaneous;
 
 fn main() {
+    // Simple idea is compiler strips any field with `PhantomData` at compile time (after any verification is done)
+    // 
+    struct Meter (i32);
+    struct Foot (i32);
     
-    let x = String::from("hello");
-
-    fn shortest<'a>(x: &'a String, y: &'a String) -> &'a String {
-        if x.len() < y.len() {
-            x
-        } else {
-            y
-        }
+    struct Person<U> {
+        height: U,
     }
 
-    let result;
-
-    {
-        let y = String::from("world");
-        result = shortest(&x, &y);
-    }
-    
-    // println!("{}", result);
-    
+    let p = Person::<Meter> {
+        height: Meter(170),
+    };
 }

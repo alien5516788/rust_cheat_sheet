@@ -11,7 +11,7 @@ fn trait_objects() {
             - Trait must be object-safe
     */
 
-    // Trait implementation
+    // trait implementation
     struct User {
         name: String,
     }
@@ -37,7 +37,7 @@ fn trait_objects() {
     }
 
     // Example
-    // Uses `dyn Trait` syntax
+    // uses `dyn Trait` syntax
     fn print_description(item: &dyn Describable) {
         /*
            - `item` can be any type implementing trait `Describable`

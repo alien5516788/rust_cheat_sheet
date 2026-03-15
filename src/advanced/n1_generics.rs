@@ -17,11 +17,12 @@ pub mod types_of_generics {
     */
 
     // 1. Type generics
-    /*
-        - Type generics to specify the concrete type for generic parameters
-        - Allows us to write generic code that can work with multiple concrete types
-    */
     fn type_generics() {
+        /*
+            - Type generics to specify the concrete type for generic parameters
+            - Allows us to write generic code that can work with multiple concrete types
+        */
+
         // Example 1
         /*
            - The concrete type for `T` and `U` is determined at compile time by the caller
@@ -88,13 +89,14 @@ pub mod types_of_generics {
     }
 
     // 2. Const generics
-    /*
-        - Const generics allow specifying constant values as generic parameters instead of types
-        - Const generics support only integer types, bool, char, and references to them
-        - Unlike type generics, the constant value cannot be inferred from the context and must be explicitly
-            provided inside the turbofish syntax
-    */
     fn const_generics() {
+        /*
+            - Const generics allow specifying constant values as generic parameters instead of types
+            - Const generics support only integer types, bool, char, and references to them
+            - Unlike type generics, the constant value cannot be inferred from the context and must be explicitly
+                provided inside the turbofish syntax
+        */
+
         // Example 1
         /*
             - The constant value for `U` is determined by the caller at compile time
@@ -144,17 +146,18 @@ pub mod types_of_generics {
     }
 
     // 3. Life time generics
-    /*
-        - Describe the relationship between the lifetimes of references
-        - Life time generics on functions define the lifetime of the arguments and return value
-        - Life time generics on other items define the lifetime of attributes and items themselves
-        - Always applied on references
-        - Note: There is also an special lifetime parameter `'static` apart from custom
-            lifetime parameters like `'a`, `'b`, `'c`, etc
-        - `'static` indicates that the value has a lifetime that is the entire duration of the program
-        - Variables initialized with static keyword will have a `'static` lifetime
-    */
     fn lifetime_generics() {
+        /*
+            - Describe the relationship between the lifetimes of references
+            - Life time generics on functions define the lifetime of the arguments and return value
+            - Life time generics on other items define the lifetime of attributes and items themselves
+            - Always applied on references
+            - Note: There is also an special lifetime parameter `'static` apart from custom
+                lifetime parameters like `'a`, `'b`, `'c`, etc
+            - `'static` indicates that the value has a lifetime that is the entire duration of the program
+            - Variables initialized with static keyword will have a `'static` lifetime
+        */
+
         // Example 1
         /*
             - 'a ties input and output references together

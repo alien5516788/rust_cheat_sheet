@@ -6,5 +6,6 @@ pub mod n5_trait_objects;
 pub mod n6_lifetime_bounds;
 pub mod n7_async_await;
 pub mod n8_macros;
+pub mod n9_phantom_data;
 pub mod nightly;
 pub mod traits_extra;

@@ -1,7 +1,7 @@
 fn for_loops() {
     /*
        - Repeatedly run a logical block of code by iterating over a range or collection
-       - For loop is mostly a sugar for `Iterator` trait
+       - For loop is mostly a syntactic sugar for `Iterator` trait
     */
 
     // Example 1

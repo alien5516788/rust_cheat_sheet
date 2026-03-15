@@ -9,7 +9,7 @@ fn trait_bounds() {
         - All trait bounds are checked at compile time
     */
 
-    // Trait implementation
+    // trait implementation
     struct User {
         name: String,
     }
